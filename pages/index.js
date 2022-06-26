@@ -8,14 +8,12 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Navbar />
+    <div>
       <h1>Hello</h1>
       <p>lorem </p>
       <Link href="/campaigns">
         <a>Campaigns</a>
       </Link>
-      <Footer />
     </div>
   )
 }
