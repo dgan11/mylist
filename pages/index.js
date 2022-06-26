@@ -9,10 +9,10 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div>
-      <h1>Hello</h1>
-      <p>lorem </p>
+      <h1 className={styles.title}>Home Page</h1>
+      <p className={styles.text}>lorem </p>
       <Link href="/campaigns">
-        <a>Campaigns</a>
+        <a className={styles.btn}>Campaigns</a>
       </Link>
     </div>
   )
