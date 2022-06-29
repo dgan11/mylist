@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <h1 className={styles.title}>Home Page</h1>
-      <p className={styles.text}>lorem </p>
+      <p className={styles.text}>Hello and welcome to the home page. </p>
       <Link href="/campaigns">
         <a className={styles.btn}>Campaigns</a>
       </Link>
