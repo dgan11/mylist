@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 const About = () => {
   const [nfts, setNfts] = useState([]);
   const [authenticated, setAuthenticated] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     window.addEventListener('m-authenticated', async (event) => {
@@ -23,44 +24,55 @@ const About = () => {
     })
   });
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  }, [count]);
+
 
   return (
     <div>
-        <h1>About</h1>
-        <p>This is the about page. View NFTs in your wallet</p>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
 
-        {/* -- Add Connect Widget -- */}
-        {/* <div  
-          data-widget="m-connect"
-          data-app-name="dgSig"
-          data-client-id="c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6"
-          data-network="1"
-          //// Optional Button Settings
-          // data-fallback-provider={process.env.DATA_FALLBACK_PROVIDER}
-          // data-override-connect-text="Connect" // Text on button
-        >  
-        </div> */}
-        <div dangerouslySetInnerHTML={{ 
-          __html: 
-          "<div \
-              data-widget='m-connect' \
-              data-app-name='dgSig' \
-              data-client-id='c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6' \
-              data-network='1' \
-          ></div>"
-        }} />
-        
-        {/* Display NFTs */}
-        {authenticated && <h2 className={styles.title}>Your NFTs</h2>}
-        <div id="nfts">
-          {nfts.map((nft) => {
-            return (
-              <img key={`${nft.tokenId}-${nft.contractAddress}`} src={nft.image} height={200} width={200}></img>
-            )
-          })}
-        </div>
+      <h1>About</h1>
+      
+      <p>This is the about page. View NFTs in your wallet</p>
 
-    </div>
+      {/* -- Add Connect Widget -- */}
+      {/* <div  
+        data-widget="m-connect"
+        data-app-name="dgSig"
+        data-client-id="c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6"
+        data-network="1"
+        //// Optional Button Settings
+        // data-fallback-provider={process.env.DATA_FALLBACK_PROVIDER}
+        // data-override-connect-text="Connect" // Text on button
+      >  
+      </div> */}
+      <div dangerouslySetInnerHTML={{ 
+        __html: 
+        "<div \
+            data-widget='m-connect' \
+            data-app-name='dgSig' \
+            data-client-id='c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6' \
+            data-network='1' \
+        ></div>"
+      }} />
+      
+      {/* Display NFTs */}
+      {authenticated && <h2 className={styles.title}>Your NFTs</h2>}
+      <div id="nfts">
+        {nfts.map((nft) => {
+          return (
+            <img key={`${nft.tokenId}-${nft.contractAddress}`} src={nft.image} height={200} width={200}></img>
+          )
+        })}
+      </div>
+
+  </div>
   )
 }
 
