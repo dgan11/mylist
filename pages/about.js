@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
 const About = () => {
   const [nfts, setNfts] = useState([]);
@@ -29,6 +29,13 @@ const About = () => {
     document.title = `You clicked ${count} times`;
   }, [count]);
 
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+  function handleClickForceUpdate() {
+    forceUpdate();
+    console.log('force update')
+  }
+
 
   return (
     <div>
@@ -36,13 +43,14 @@ const About = () => {
       <button onClick={() => setCount(count + 1)}>
         Click me
       </button>
+      <button onClick={handleClickForceUpdate}>Force Rerender</button>
 
       <h1>About</h1>
       
       <p>This is the about page. View NFTs in your wallet</p>
 
       {/* -- Add Connect Widget -- */}
-      {/* <div  
+      <div  
         data-widget="m-connect"
         data-app-name="dgSig"
         data-client-id="c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6"
@@ -51,8 +59,8 @@ const About = () => {
         // data-fallback-provider={process.env.DATA_FALLBACK_PROVIDER}
         // data-override-connect-text="Connect" // Text on button
       >  
-      </div> */}
-      <div dangerouslySetInnerHTML={{ 
+      </div>
+      {/* <div dangerouslySetInnerHTML={{ 
         __html: 
         "<div \
             data-widget='m-connect' \
@@ -60,7 +68,7 @@ const About = () => {
             data-client-id='c6368ddb0a2276fae6abe837bea60cbe6557fb9908e84d0fbcbd95b45f4f3cf6' \
             data-network='1' \
         ></div>"
-      }} />
+      }} /> */}
       
       {/* Display NFTs */}
       {authenticated && <h2 className={styles.title}>Your NFTs</h2>}
